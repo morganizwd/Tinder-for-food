@@ -9,7 +9,8 @@ export const loginValidation = [
 export const registerValidation = [
     body('email', 'Invalid email format').notEmpty().isEmail(),
     body('password', 'Password should be at least 8 symbols').isLength({ min: 8 }),
-    body('userName', 'Name is too short').isLength({ min: 2 }),
+    body('name', 'Name is too short').isLength({ min: 2 }),
+    body('surname', 'Name is too short').isLength({ min: 2 }),
     body('role', 'Invalid role').custom((value) => {
         const roles = ['student', 'admin', 'teacher'];
         if (!roles.includes(value)) {

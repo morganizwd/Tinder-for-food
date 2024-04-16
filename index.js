@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cors from 'cors';
-import { adminOnlyAuth } from './utils';
 
 import {
     userController,
@@ -62,7 +61,6 @@ app.post('/auth/login', loginValidation, handleValidationErrors, userController.
 app.post('/auth/register', registerValidation, handleValidationErrors, userController.register);
 app.get('/auth/me', allRolesAuth, userController.getMe);
 app.get('/user/:userId', allRolesAuth, userController.getUserById);
-app.get('/users', userController.getAllUsers);
 
 //category
 app.post('/category/create', adminOnlyAuth, createCategoryValidation, handleValidationErrors, categoryController.create);
@@ -73,14 +71,14 @@ app.get('/categories/:id', allRolesAuth, categoryController.getOne);
 
 //dish
 app.post('/dish/create', adminOnlyAuth, createDishValidation, handleValidationErrors, dishController.create);
-app.delete('/dish/delet/:id', adminOnlyAuth, dishController.remove);
+app.delete('/dish/delete/:id', adminOnlyAuth, dishController.remove);
 app.patch('/dish/update/:id', adminOnlyAuth, updateDishValidation, handleValidationErrors, dishController.update);
 app.get('/dishes', allRolesAuth, dishController.getAll);
 app.get('/dishes/:id', allRolesAuth, dishController.getOne);
 
 //restaurant
 app.post('/restaurant/create', adminOnlyAuth, createRestaurantValidation, handleValidationErrors, restaurantController.create);
-app.delete('/restaurant/delet/:id', adminOnlyAuth, restaurantController.remove);
+app.delete('/restaurant/delete/:id', adminOnlyAuth, restaurantController.remove);
 app.patch('/restaurant/update/:id', adminOnlyAuth, updateRestaurantValidation, handleValidationErrors, restaurantController.update);
 app.get('/restaurants', allRolesAuth, restaurantController.getAll);
 app.get('/restaurants/:id', allRolesAuth, restaurantController.getOne);
